@@ -21,7 +21,7 @@ class MedPointController extends Controller
             'status' => 'true',
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expirese_in' => $this->guard()->factory()->getTTL()*60,
+            // 'expirese_in' => $this->guard()->factory()->getTTL()*60,
         ]);
     }
     public function guard(){

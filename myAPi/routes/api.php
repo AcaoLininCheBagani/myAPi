@@ -25,8 +25,14 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['api'] ,'prefix' => '/registers'], function () {
     Route::get('/','MedController@read');
     Route::post('/create','MedController@create');
-    Route::post('/login', 'MedController@login');
+    Route::put('/update/{id}', 'MedController@update');
+    Route::delete('/delete/{id}','MedController@delete');
+
 });
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::group(['middleware' => ['jwt.auth']], function () {
+
+// });

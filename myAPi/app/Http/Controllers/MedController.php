@@ -14,16 +14,7 @@ class MedController extends Controller
         return response()->json($record);
     }
 
-    public function create(Request $request)
-    {
-        $record = new register;
-        $record->name = $request->name;
-        $record->email = $request->email;
-        $record->password = Hash::make($request->password);
-        $record->save();
-        return response()->json(['status'=> true, 'message' => 'User created']);
 
-    }
     //function to update
     public function update(Request $request , $id)
     {
@@ -51,5 +42,17 @@ class MedController extends Controller
             return response()->json(['status' => false, 'message' => 'No such user!']);
         }
     }
-
+     //function to view
+     public function view(Request $request , $email)
+     {
+        try{
+            $record = register::findOrFail($email);
+            $record->name = $request->name;
+            $record->name = $request->email;
+            return  response()->json($record);
+        }catch(\Exception $e)
+        {
+            return response()->json(['status' => false, 'message' => 'No such user!']);
+        }
+     }
 }

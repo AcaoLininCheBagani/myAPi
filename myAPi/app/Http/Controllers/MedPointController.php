@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\register;
 use App\User;
 use Tymon\JWTAuth\JWTAuth;
 use GuzzleHttp\Middleware;
@@ -49,10 +50,10 @@ class MedPointController extends Controller
         $record->email = $request->email;
         $record->password = Hash::make($request->password);
         $record->save();
-        return response()->json(['status'=> true, 'message' => 'Successfully created account!.']);
+        return response()->json(['status'=> "Success", 'message' => 'Successfully created account!.']);
     }
     //get user
-    //same sa logout pwede gihapon maka get ug info sa user naa or wala ang api
+    //same sa logout pwede gihapon maka get ug info sa user naa or wala ni api
     public function user() {
         return response()->json(\Auth::guard('api')->user());
     }
@@ -65,10 +66,10 @@ class MedPointController extends Controller
             $record->email = $request->email;
             $record->save();
 
-            return  response()->json(['status' => true, 'message' => 'Successfully updated!.']);
+            return  response()->json(['status' => "Success", 'message' => 'Successfully updated!.']);
         }catch(\Exception $e)
         {
-            return response()->json(['status' => false, 'message' => 'No such user!']);
+            return response()->json(['status' => "Error", 'message' => 'User already exist!']);
         }
     }
     //logout
@@ -83,4 +84,18 @@ class MedPointController extends Controller
         ], 200);
     }
 
+
+    //function to delete
+    public function delete($id)
+    {
+        try{
+            $record = user::findOrFail($id);
+            $record->delete();
+
+            return  response()->json(['status' => true, 'message' => 'Successfully deleted!.']);
+        }catch(\Exception $e)
+        {
+            return response()->json(['status' => false, 'message' => 'No such user!']);
+        }
+    }
 }

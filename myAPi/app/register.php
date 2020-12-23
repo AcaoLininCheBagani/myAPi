@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class register extends Model
 {
-    protected $table = 'registers';
+    protected $table = 'appointment';
 
 }

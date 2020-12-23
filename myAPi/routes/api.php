@@ -42,7 +42,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // });
 Route::post('/register','MedPointController@register')->name('api.jwt.register');
 Route::post('/login','MedPointController@login')->name('api.jwt.login');
-
+ //delete
+Route::delete('/delete/{id}','MedPointController@delete')->name('api.jwt.delete');
 Route::get('unauthorized', function() {
     return response()->json([
         'status' => 'error',
@@ -57,6 +58,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('user', 'MedPointController@user')->name('api.jwt.user');
     //update
     Route::put('update/{id}', 'MedPointController@update')->name('api.jwt.update');
+
 });
 
 
